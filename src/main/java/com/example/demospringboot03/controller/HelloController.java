@@ -1,9 +1,15 @@
 package com.example.demospringboot03.controller;
 
+import com.example.demospringboot03.entity.Student;
+import com.example.demospringboot03.entity.UserEntity;
 import com.example.demospringboot03.payload.request.LoginRequest;
+import com.example.demospringboot03.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /*
     @Controller : dung de dinh nghia duong dan ma noi dung duong dan tra ra html
@@ -17,6 +23,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/hello")
 public class HelloController {
 
+    @Autowired // tim tren IOC check xem co ko, thi lay xuong sai
+    private Student student;
+
+    @Autowired
+    private UserRepository userRepository;
     // Tham so truyen tren trinh duyet (get) : @RequestParam
     // Tham so truyen` ngam` (ngoài get) @RequestParam
     // Tham số đóng vai trò như là 1 đường dẫn : @PathVariable
@@ -31,8 +42,9 @@ public String hello(@RequestParam (required = false)String hoten) : required = f
      */
 
     @GetMapping("")
-    public String hello(@RequestParam String hoten, @RequestParam int tuoi) {
-        return "Hello Spring boot" + hoten + " - tuoi : " + tuoi;
+    public ResponseEntity<?> hello(String email, String password) {
+        List<UserEntity> list = userRepository.findByEmailAndPassword(email, password);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     //form-data truyen ngam chonj form-data: tham số truyền ngầm và truyen file

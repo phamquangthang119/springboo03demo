@@ -1,10 +1,15 @@
 package com.example.demospringboot03.payload.request;
 
+import lombok.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginRequest {
     private String username;
     private String password;
 
-    public LoginRequest(String username, String password) {
+  /*  public LoginRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -23,5 +28,5 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }*/
 }
