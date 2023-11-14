@@ -1,1 +1,2 @@
 Day la file chuc nang hien thi san pham cua may B
+noi dung chinh sua home cua may A
